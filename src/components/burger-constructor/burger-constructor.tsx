@@ -13,8 +13,7 @@ import {
   removeFromOrder
 } from '../../services/slices/orderSlice';
 import { selectorUserAuthorized } from '../../services/slices/userSlice';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'src/services/store';
+import { useDispatch } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
@@ -24,7 +23,7 @@ export const BurgerConstructor: FC = () => {
 
   const orderModalData = useSelector(selectorOrder);
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuthorized = useSelector(selectorUserAuthorized);
 

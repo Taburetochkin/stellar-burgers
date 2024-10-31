@@ -21,11 +21,10 @@ import { getFeeds } from '../../services/slices/feedSlice';
 
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate, useMatch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'src/services/store';
+import { useDispatch } from '../../services/store';
 
 const App = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const feedOrderNumber = useMatch('/feed/:number')?.params.number;
   const userOrderNumber = useMatch('/profile/orders/:number')?.params.number;

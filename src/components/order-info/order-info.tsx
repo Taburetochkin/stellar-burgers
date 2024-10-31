@@ -2,14 +2,13 @@ import { FC, useMemo, useEffect } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from 'src/services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { useParams } from 'react-router-dom';
 import { getOrder, selectorOrderInfo } from '../../services/slices/orderSlice';
 import { selectorIngredients } from '../../services/slices/ingredientSlice';
 
 export const OrderInfo: FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const orderNumber = Number(useParams().number);
   useEffect(() => {
     dispatch(getOrder(orderNumber));

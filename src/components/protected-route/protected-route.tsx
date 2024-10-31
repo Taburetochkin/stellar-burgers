@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/store';
 import { selectorUserAuthorized } from '../../services/slices/userSlice';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 type ProtectedRouteProps = {
