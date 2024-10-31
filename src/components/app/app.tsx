@@ -10,21 +10,23 @@ import {
   NotFound404
 } from '@pages';
 
-import {
-  AppHeader,
-  Modal,
-  OrderInfo,
-  IngredientDetails
-} from '@components';
+import { AppHeader, Modal, OrderInfo, IngredientDetails } from '@components';
 import '../../index.css';
 import styles from './app.module.css';
 
+import { getIngredients } from '../../services/slices/ingredientSlice';
+
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { UseDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'src/services/store';
 
 const App = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
   return (
     <div className={styles.app}>
       <AppHeader />
@@ -34,11 +36,7 @@ const App = () => {
         <Route
           path='/feed/:number'
           element={
-            <Modal
-              title='lol1'
-              onClose={() => {
-              }}
-            >
+            <Modal title='lol1' onClose={() => {}}>
               <OrderInfo />
             </Modal>
           }
@@ -46,11 +44,7 @@ const App = () => {
         <Route
           path='/ingredients/:id'
           element={
-            <Modal
-              title='lol2'
-              onClose={() => {
-              }}
-            >
+            <Modal title='lol2' onClose={() => {}}>
               <IngredientDetails />
             </Modal>
           }
@@ -64,11 +58,7 @@ const App = () => {
         <Route
           path='/profile/orders/:number'
           element={
-            <Modal
-              title='lol3'
-              onClose={() => {
-              }}
-            >
+            <Modal title='lol3' onClose={() => {}}>
               <OrderInfo />
             </Modal>
           }
@@ -76,7 +66,7 @@ const App = () => {
         <Route path='*' element={<NotFound404 />} />
       </Routes>
     </div>
-  );  
+  );
 };
 
 export default App;
