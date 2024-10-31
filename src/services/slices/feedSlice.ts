@@ -1,6 +1,6 @@
 import { TOrder } from '@utils-types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getFeedsApi } from '@api';
+import { getFeedsApi, getOrdersApi } from '@api';
 
 export interface FeedState {
   isLoading: boolean;
@@ -23,6 +23,11 @@ export const getFeeds = createAsyncThunk(
   async () => await getFeedsApi()
 );
 
+export const getProfileFeeds = createAsyncThunk(
+  'feed/getProfileFeed',
+  async () => await getOrdersApi()
+);
+
 export const feedSlice = createSlice({
   name: 'feed',
   initialState: initialFeedState,
@@ -43,6 +48,20 @@ export const feedSlice = createSlice({
         state.orders = action.payload.orders;
         state.total = action.payload.total;
         state.totalToday = action.payload.totalToday;
+      })
+      .addCase(getProfileFeeds.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getProfileFeeds.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error =
+          action.error.message || 'Не удалось загрузить ленту заказов';
+      })
+      .addCase(getProfileFeeds.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.orders = action.payload;
+        state.error = null;
       });
   },
   selectors: {
