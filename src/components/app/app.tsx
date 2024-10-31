@@ -17,12 +17,13 @@ import styles from './app.module.css';
 import { getIngredients } from '../../services/slices/ingredientSlice';
 
 import { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'src/services/store';
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -44,7 +45,12 @@ const App = () => {
         <Route
           path='/ingredients/:id'
           element={
-            <Modal title='lol2' onClose={() => {}}>
+            <Modal
+              title='Детали ингредиента'
+              onClose={() => {
+                navigate('/');
+              }}
+            >
               <IngredientDetails />
             </Modal>
           }
