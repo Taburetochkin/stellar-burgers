@@ -17,19 +17,23 @@ import styles from './app.module.css';
 
 import { getIngredients } from '../../services/slices/ingredientSlice';
 import { getUser } from '../../services/slices/userSlice';
+import { getFeeds } from '../../services/slices/feedSlice';
 
 import { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'src/services/store';
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const location = useLocation();
+  const background = location.state?.background;
 
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(getUser());
+    dispatch(getFeeds());
   }, [dispatch]);
   return (
     <div className={styles.app}>
@@ -40,7 +44,12 @@ const App = () => {
         <Route
           path='/feed/:number'
           element={
-            <Modal title='lol1' onClose={() => {}}>
+            <Modal
+              title='Лента заказов'
+              onClose={() => {
+                navigate('/feed');
+              }}
+            >
               <OrderInfo />
             </Modal>
           }
