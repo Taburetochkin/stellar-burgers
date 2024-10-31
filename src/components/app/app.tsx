@@ -11,10 +11,12 @@ import {
 } from '@pages';
 
 import { AppHeader, Modal, OrderInfo, IngredientDetails } from '@components';
+import { ProtectedRoute } from '../protected-route';
 import '../../index.css';
 import styles from './app.module.css';
 
 import { getIngredients } from '../../services/slices/ingredientSlice';
+import { getUser } from '../../services/slices/userSlice';
 
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
@@ -27,6 +29,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getIngredients());
+    dispatch(getUser());
   }, [dispatch]);
   return (
     <div className={styles.app}>
@@ -55,20 +58,24 @@ const App = () => {
             </Modal>
           }
         />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
-        <Route path='/reset-password' element={<ResetPassword />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/profile/orders' element={<ProfileOrders />} />
-        <Route
-          path='/profile/orders/:number'
-          element={
-            <Modal title='lol3' onClose={() => {}}>
-              <OrderInfo />
-            </Modal>
-          }
-        />
+        <Route element={<ProtectedRoute Auth={false} />}>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
+        </Route>
+        <Route element={<ProtectedRoute Auth />}>
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/orders' element={<ProfileOrders />} />
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <Modal title='lol3' onClose={() => {}}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+        </Route>
         <Route path='*' element={<NotFound404 />} />
       </Routes>
     </div>
