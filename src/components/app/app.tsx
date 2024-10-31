@@ -20,15 +20,15 @@ import { getUser } from '../../services/slices/userSlice';
 import { getFeeds } from '../../services/slices/feedSlice';
 
 import { useEffect } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useMatch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'src/services/store';
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const location = useLocation();
-  const background = location.state?.background;
+  const feedOrderNumber = useMatch('/feed/:number')?.params.number;
+  const userOrderNumber = useMatch('/profile/orders/:number')?.params.number;
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -45,7 +45,7 @@ const App = () => {
           path='/feed/:number'
           element={
             <Modal
-              title='Лента заказов'
+              title={`#0${feedOrderNumber}`}
               onClose={() => {
                 navigate('/feed');
               }}
@@ -79,7 +79,12 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title='lol3' onClose={() => {}}>
+              <Modal
+                title={`#0${userOrderNumber}`}
+                onClose={() => {
+                  navigate('/profile/orders');
+                }}
+              >
                 <OrderInfo />
               </Modal>
             }

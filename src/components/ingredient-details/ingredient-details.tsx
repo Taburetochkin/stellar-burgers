@@ -5,11 +5,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../services/store';
 import { TIngredient } from '@utils-types';
 import { useParams } from 'react-router-dom';
+import { selectorIngredients } from '../../services/slices/ingredientSlice';
 
 export const IngredientDetails: FC = () => {
-  const ingredients = useSelector(
-    (state: RootState) => state.ingredients.ingredients
-  );
+  const ingredients = useSelector(selectorIngredients);
   const params = useParams();
 
   const ingredientData = ingredients?.find(

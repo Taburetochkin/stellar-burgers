@@ -1,19 +1,20 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useEffect } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from 'src/services/store';
 import { useParams } from 'react-router-dom';
-import { selectorOrders } from '../../services/slices/feedSlice';
+import { getOrder, selectorOrderInfo } from '../../services/slices/orderSlice';
 import { selectorIngredients } from '../../services/slices/ingredientSlice';
 
 export const OrderInfo: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { orderNumber } = useParams();
-  const orderData = useSelector(selectorOrders).find(
-    (order) => order.number === Number(orderNumber)
-  );
+  const orderNumber = Number(useParams().number);
+  useEffect(() => {
+    dispatch(getOrder(orderNumber));
+  }, [dispatch, orderNumber]);
+  const orderData = useSelector(selectorOrderInfo);
 
   const ingredients: TIngredient[] = useSelector(selectorIngredients);
 

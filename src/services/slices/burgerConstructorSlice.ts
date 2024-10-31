@@ -22,9 +22,9 @@ export const burgerConstructorSlice = createSlice({
         state.ingredients.push(action.payload);
       }
     },
-    removeIngredient: (state, action: PayloadAction<{ _id: string }>) => {
+    removeIngredient: (state, action: PayloadAction<string>) => {
       state.ingredients = state.ingredients.filter(
-        (ingredient) => ingredient._id !== action.payload._id
+        (ingredient) => ingredient.id !== action.payload
       );
     },
     moveIngredientUp: (state, action: PayloadAction<number>) => {
@@ -49,6 +49,9 @@ export const burgerConstructorSlice = createSlice({
       state.bun = null;
       state.ingredients = [];
     }
+  },
+  selectors: {
+    selectorBurgerConstructor: (state) => state
   }
 });
 
@@ -59,4 +62,5 @@ export const {
   moveIngredientDown,
   clearBurgerConstructor
 } = burgerConstructorSlice.actions;
+export const { selectorBurgerConstructor } = burgerConstructorSlice.selectors;
 export default burgerConstructorSlice.reducer;
