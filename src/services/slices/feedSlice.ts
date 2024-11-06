@@ -40,8 +40,7 @@ export const feedSlice = createSlice({
       })
       .addCase(getFeeds.rejected, (state, action) => {
         state.isLoading = false;
-        state.error =
-          action.error.message;
+        state.error = action.error.message;
       })
       .addCase(getFeeds.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -55,8 +54,7 @@ export const feedSlice = createSlice({
       })
       .addCase(getProfileFeeds.rejected, (state, action) => {
         state.isLoading = false;
-        state.error =
-          action.error.message;
+        state.error = action.error.message;
       })
       .addCase(getProfileFeeds.fulfilled, (state, action) => {
         state.isLoading = false;

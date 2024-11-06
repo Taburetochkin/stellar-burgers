@@ -5,20 +5,20 @@ import {
   loginUser,
   updateUser,
   logoutUser
-} from "../userSlice";
+} from '../userSlice';
 
 const mockUser = {
   user: {
     email: '123@gmail.com',
     name: 'Zhesha'
   }
-}
+};
 
 describe('User Slice tests', () => {
   it('Set True during getUser.pending', () => {
     const testState = userSlice.reducer(initialUserState, {
       type: getUser.pending.type
-    })
+    });
     expect(testState.isLoading).toBe(true);
     expect(testState.error).toBe(null);
     expect(testState.isAuthorized).toBe(false);
@@ -31,7 +31,7 @@ describe('User Slice tests', () => {
       error: {
         message: 'Error is present'
       }
-    })
+    });
     expect(testState.isLoading).toBe(false);
     expect(testState.error).toBe('Error is present');
   });
@@ -49,7 +49,7 @@ describe('User Slice tests', () => {
   it('Set True during loginUser.pending', () => {
     const testState = userSlice.reducer(initialUserState, {
       type: loginUser.pending.type
-    })
+    });
     expect(testState.isLoading).toBe(true);
     expect(testState.error).toBe(null);
   });
@@ -60,7 +60,7 @@ describe('User Slice tests', () => {
       error: {
         message: 'Error is present'
       }
-    })
+    });
     expect(testState.isLoading).toBe(false);
     expect(testState.error).toBe('Error is present');
   });
@@ -79,7 +79,7 @@ describe('User Slice tests', () => {
   it('Set True during updateUser.pending', () => {
     const testState = userSlice.reducer(initialUserState, {
       type: updateUser.pending.type
-    })
+    });
     expect(testState.isLoading).toBe(true);
     expect(testState.error).toBe(null);
   });
@@ -90,7 +90,7 @@ describe('User Slice tests', () => {
       error: {
         message: 'Error is present'
       }
-    })
+    });
     expect(testState.isLoading).toBe(false);
     expect(testState.error).toBe('Error is present');
   });
@@ -108,7 +108,7 @@ describe('User Slice tests', () => {
   it('Set True during logoutUser.pending', () => {
     const testState = userSlice.reducer(initialUserState, {
       type: logoutUser.pending.type
-    })
+    });
     expect(testState.isLoading).toBe(true);
     expect(testState.error).toBe(null);
   });
@@ -119,17 +119,17 @@ describe('User Slice tests', () => {
       error: {
         message: 'Error is present'
       }
-    })
+    });
     expect(testState.isLoading).toBe(false);
     expect(testState.error).toBe('Error is present');
   });
 
   it('Set user during logoutUser.fulfilled', () => {
     const testState = userSlice.reducer(initialUserState, {
-      type: logoutUser.fulfilled.type,
+      type: logoutUser.fulfilled.type
     });
     expect(testState.isLoading).toBe(false);
     expect(testState.isAuthorized).toBe(false);
     expect(testState.user).toBe(null);
   });
-})
+});

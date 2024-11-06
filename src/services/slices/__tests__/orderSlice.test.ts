@@ -1,11 +1,11 @@
-import { TOrder } from "@utils-types";
+import { TOrder } from '@utils-types';
 import {
   orderSlice,
   initialOrderState,
   getOrder,
   createOrder,
   removeFromOrder
-} from "../orderSlice";
+} from '../orderSlice';
 
 const mockOrders = {
   orders: [
@@ -16,11 +16,9 @@ const mockOrders = {
       createdAt: '12.12.12',
       updatedAt: '12.12.12',
       number: 1,
-      ingredients: [
-        '1', '2', '3'
-      ],
+      ingredients: ['1', '2', '3'],
       owner: 'Zhesha1'
-    }, 
+    },
     {
       _id: '2',
       status: 'gotovo',
@@ -28,9 +26,7 @@ const mockOrders = {
       createdAt: '12.12.12',
       updatedAt: '12.12.12',
       number: 1,
-      ingredients: [
-        '1', '2', '3'
-      ],
+      ingredients: ['1', '2', '3'],
       owner: 'Zhesha1'
     },
     {
@@ -40,13 +36,11 @@ const mockOrders = {
       createdAt: '12.12.12',
       updatedAt: '12.12.12',
       number: 1,
-      ingredients: [
-        '1', '2', '3'
-      ],
+      ingredients: ['1', '2', '3'],
       owner: 'Zhesha1'
-    },
+    }
   ]
-}
+};
 
 const mockOrder = {
   order: {
@@ -56,13 +50,9 @@ const mockOrder = {
     createdAt: '12.12.12',
     updatedAt: '12.12.12',
     number: 1,
-    ingredients: [
-      '1', '2', '3'
-    ]
+    ingredients: ['1', '2', '3']
   }
-}
-
-
+};
 
 describe('Order Slice Tests', () => {
   it('Test removeFromOrder', () => {
@@ -70,7 +60,9 @@ describe('Order Slice Tests', () => {
       {
         ...initialOrderState,
         order: mockOrder.order
-      }, removeFromOrder());
+      },
+      removeFromOrder()
+    );
     expect(testState).toEqual(initialOrderState);
   });
 
@@ -129,4 +121,4 @@ describe('Order Slice Tests', () => {
     expect(testState.isLoading).toBe(false);
     expect(testState.order).toBe(mockOrder.order);
   });
-})
+});

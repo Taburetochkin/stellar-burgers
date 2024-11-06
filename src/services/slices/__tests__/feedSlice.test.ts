@@ -3,7 +3,7 @@ import {
   initialFeedState,
   getFeeds,
   getProfileFeeds
-} from "../feedSlice";
+} from '../feedSlice';
 
 const mockFeeds = {
   orders: [
@@ -19,11 +19,13 @@ const mockFeeds = {
   ],
   total: 231,
   totalToday: 3
-}
+};
 
 describe('Feed Slice Tests', () => {
   it('Set True during getFeeds.pending', () => {
-    const testState = feedSlice.reducer(initialFeedState, {type: getFeeds.pending.type});
+    const testState = feedSlice.reducer(initialFeedState, {
+      type: getFeeds.pending.type
+    });
     expect(testState.isLoading).toBe(true);
     expect(testState.error).toBe(null);
   });
@@ -34,7 +36,7 @@ describe('Feed Slice Tests', () => {
       error: {
         message: 'Не удалось загрузить ленту заказов'
       }
-    })
+    });
     expect(testState.isLoading).toBe(false);
     expect(testState.error).toBe('Не удалось загрузить ленту заказов');
   });
@@ -51,7 +53,9 @@ describe('Feed Slice Tests', () => {
   });
 
   it('Set True during getProfileFeeds.pending', () => {
-    const testState = feedSlice.reducer(initialFeedState, {type: getProfileFeeds.pending.type});
+    const testState = feedSlice.reducer(initialFeedState, {
+      type: getProfileFeeds.pending.type
+    });
     expect(testState.isLoading).toBe(true);
     expect(testState.error).toBe(null);
   });
@@ -62,9 +66,9 @@ describe('Feed Slice Tests', () => {
       error: {
         message: 'Не удалось загрузить ленту заказов'
       }
-    })
+    });
     expect(testState.isLoading).toBe(false);
-    expect(testState.error).toBe('Не удалось загрузить ленту заказов'); 
+    expect(testState.error).toBe('Не удалось загрузить ленту заказов');
   });
 
   it('Set orders during getProfileFeeds.fulfilled', () => {
@@ -75,5 +79,5 @@ describe('Feed Slice Tests', () => {
     expect(testState.isLoading).toBe(false);
     expect(testState.orders).toBe(mockFeeds.orders);
     expect(testState.error).toBe(null);
-  })
-})
+  });
+});
