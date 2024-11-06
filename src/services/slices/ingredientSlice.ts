@@ -5,7 +5,7 @@ import { getIngredientsApi } from '@api';
 export interface IngredientsState {
   ingredients: TIngredient[];
   isLoading: boolean;
-  error: string | null;
+  error?: string | null;
 }
 
 export const initialIngredientsState: IngredientsState = {
@@ -31,7 +31,7 @@ export const ingredientsSlice = createSlice({
       })
       .addCase(getIngredients.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error.message || 'Не смог загрузить ингредиенты';
+        state.error = action.error.message;
       })
       .addCase(getIngredients.fulfilled, (state, action) => {
         state.isLoading = false;
