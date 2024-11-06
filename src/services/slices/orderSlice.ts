@@ -6,10 +6,10 @@ export interface OrderState {
   isLoading: boolean;
   order: TOrder | null;
   orderInfo: TOrder | null;
-  error: string | null;
+  error?: string | null;
 }
 
-const initialOrderState: OrderState = {
+export const initialOrderState: OrderState = {
   isLoading: false,
   order: null,
   orderInfo: null,
@@ -49,7 +49,7 @@ export const orderSlice = createSlice({
       })
       .addCase(getOrder.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error.message || 'Не удалось загрузить заказ.';
+        state.error = action.error.message;
       })
       .addCase(getOrder.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -61,7 +61,7 @@ export const orderSlice = createSlice({
       })
       .addCase(createOrder.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error.message || 'Не удалось загрузить заказ.';
+        state.error = action.error.message;
       })
       .addCase(createOrder.fulfilled, (state, action) => {
         state.isLoading = false;
