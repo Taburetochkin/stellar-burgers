@@ -21,8 +21,6 @@ const mockFeeds = {
   totalToday: 3
 }
 
-
-
 describe('Feed Slice Tests', () => {
   it('Set True during getFeeds.pending', () => {
     const testState = feedSlice.reducer(initialFeedState, {type: getFeeds.pending.type});

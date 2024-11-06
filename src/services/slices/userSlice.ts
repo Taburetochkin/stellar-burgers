@@ -16,7 +16,7 @@ export interface UserState {
   user: TUser | null;
   isAuthorized: boolean;
   isLoading: boolean;
-  error: string | null;
+  error?: string | null;
 }
 
 export const initialUserState: UserState = {
@@ -77,7 +77,7 @@ export const userSlice = createSlice({
       })
       .addCase(getUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error.message || 'Не смог загрузить пользователя';
+        state.error = action.error.message;
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -90,7 +90,7 @@ export const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error.message || 'Не смог залогинить пользователя';
+        state.error = action.error.message;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -104,7 +104,7 @@ export const userSlice = createSlice({
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error =
-          action.error.message || 'Не смог обновить информацию пользователя';
+          action.error.message;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -116,7 +116,7 @@ export const userSlice = createSlice({
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error.message || 'Не удалось выйти из аккаунта';
+        state.error = action.error.message;
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.isLoading = false;
